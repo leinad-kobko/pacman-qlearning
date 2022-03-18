@@ -1,0 +1,61 @@
+Part A
+------
+
+200 training episodes are preferred. 
+
+When testing on my laptop these were the statistics of my last run:
+ - Map: Medium Classic
+ - Training Rounds: 200
+ - Total Rounds: 300
+ - Average Training Time (per 100): 60 seconds
+ - Average Rewards: 1415.16
+ - Average Score: 1838.17
+ - Winrate: 92/100 (92%)
+
+ - Map: Medium Grid
+ - Training Rounds: 200
+ - Total Rounds: 300
+ - Average Training Time (per 100): 2 seconds
+ - Average Rewards: 464.65
+ - Average Score: 527.32
+ - Winrate: 100/100 (100%)
+
+After running SimpleExtractor, I found the following inefficiencies with simple Pacman:
+ - Pacman only cares about the closest food. Does not care about capsules or nearby scared ghosts.
+ - Even if a scared ghost is in front of Pacman, he will avoid them
+ - Pacman will sometimes stay still
+
+The Pacman extractor I designed is made with the intention of being used on "general purpose" maps.
+It performs well on maps like mediumClassic, and will have a low winrate, but high score on trickier 
+maps like trickyClassic.
+
+Some of the new features added to raise Pacman's average score:
+Pacman seeks out capsules while there are angry ghosts so as to maximize the score gained
+from eating scared ghosts more. If a scared ghost is close enough, or in lots of food, 
+Pacman will seek it, raising the average score. Pacman tries to keep moving and not STOP 
+so as to not lose score to standing idle.Pacman is fearful of how close he is to angry ghosts
+making him try to go for food more distant from angry ghosts.
+
+All Features:
+ - can't stop
+ - eats ghost
+ - eats food
+ - eats capsule
+ - avoid capsule
+ - closest capsule
+ - closest food
+ - closest scared ghost
+ - closest angry ghost
+ - # of angry ghosts 1 step away
+
+Part B
+------
+
+For my layout I wanted to take the most advantage of my ability to seek capsules and seek
+scared ghosts. The capsule at the start is out of the way and my agent seeks/eats it. The simple
+agent would not eat it unless a ghost forces it to move into one. After my agent eats the capsule, 
+it immediately eats the two ghosts raising its score considerably. The simple agent would fear the 
+scared ghosts and still run away. I took advantage of the simple agent's fear and made the paths narrow, 
+forcing the simple agent to backtrack through the map, whereas my agent would just eat the ghosts and
+move on. Even if the simple agent manages to survive, it finishes with a much lower score than my agent, 
+whereas my agent will almost always finish with a score of 983 and a 100% winrate.
